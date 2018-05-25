@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "glamorous-native": "^1.4.0",
     "react": "16.3.1",
     "react-native": "0.55.4"
   },
@@ -17,6 +18,9 @@
     "react-test-renderer": "16.3.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIfnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|glamorous-native)"
+    ]
   }
 }

@@ -12,6 +12,9 @@ import {
   View
 } from 'react-native';
 
+import TodoItem from './todo-item';
+import InputText from './input-text';
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -21,18 +24,31 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+      todos: []
+    }
+  }
   render() {
+    const { text, todos } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          To-Do List
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit App.js
+          Manage what you have to work on with a simple and easy to use interface
         </Text>
+        { todos.map(todo => <TodoItem title={todo}></TodoItem>) }
         <Text style={styles.instructions}>
-          {instructions}
+          {text}
         </Text>
+        <InputText
+          submit={(text) => this.setState({todos: [...todos, text]})}
+          color='violet'
+        ></InputText>
       </View>
     );
   }
@@ -41,14 +57,16 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    padding: 16
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 32,
     textAlign: 'center',
-    margin: 10,
+    margin: 12,
+    color: '#313131'
   },
   instructions: {
     textAlign: 'center',
