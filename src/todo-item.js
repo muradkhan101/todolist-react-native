@@ -1,6 +1,6 @@
 import React from 'react';
 import glamourous from 'glamorous-native';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import InputText from './input-text';
 
 const Item = glamourous.view({
@@ -24,47 +24,49 @@ const Title = glamourous.text({
 })
 
 const Time = glamourous.text({
-    fontSize: 16,
+    fontSize: 12,
     color: '#a0a0a0',
     marginBottom: 8,
 })
 
-const styles = StyleSheet.create({
-    button: {
-        rotation: 45
-    }
-})
+type Todo = {
+    text: string;
+    date: string;
+    id: number;
+}
 
 type Props = {
-    title: 'string';
+    text: Todo;
+    date: string;
 };
 export default class TodoItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { editing: false }
+    state = {
+        editing: false
     }
     render() {
-        const { title, time, update } = this.props;
+        const { todo, time, update, remove } = this.props;
         const { editing } = this.state;
         return (
             <Item>
                 <View>
                     { !editing
-                        ? <Title> {title} </Title>
+                        ? <TouchableNativeFeedback
+                            onPress={() => this.setState({ editing: !editing })}>
+                            <Title> {todo.text} </Title>
+                        </TouchableNativeFeedback>
                         : <InputText
-                                submit={(text) => ( update(title, text), this.setState({editing: !editing}))}
-                                default={title}
-                            ></InputText>
+                                submit={(newText) => ( update(newText, todo.id), this.setState({editing: !editing}))}
+                                default={todo.text}
+                            />
                     }
-                    <Time> {time} </Time>
+                    <Time> {todo.date} </Time>
                 </View>
                 <View>
                     <Button
-                        onPress={() => this.setState({editing: !editing})}
-                        color='violet'
+                        onPress={() => remove(todo.id)}
+                        color='red'
                         title="X"
-                        style={styles.button}>
-                    </Button>
+                    />
                 </View>
             </Item>
         )

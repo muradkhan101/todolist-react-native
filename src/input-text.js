@@ -4,13 +4,15 @@ import { Text, TouchableNativeFeedback } from 'react-native';
 const Container = glamourous.view({
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    maxHeight: 40,
+    minWidth: '55%'
 })
 
 const Input = glamourous.textInput({
     backgroundColor: 'white',
-    flex: 1,
-    marginRight: 8
+    marginRight: 8,
+    flex: 1
 })
 
 
@@ -40,7 +42,7 @@ export default class InputText extends React.Component<Props> {
                     value={text}
                 ></Input>
                 <TouchableNativeFeedback
-                    onPress={() => submit(text)}>
+                    onPress={() => ( submit(text), this.setState({text: ''})) }>
                     <SubmitButton>Submit</SubmitButton>
                 </TouchableNativeFeedback>
             </Container>

@@ -12,8 +12,7 @@ import {
   View
 } from 'react-native';
 
-import TodoItem from './todo-item';
-import InputText from './input-text';
+import TodoContainer from './todo-container';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -41,20 +40,7 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           Manage what you have to work on with a simple and easy to use interface
         </Text>
-        { todos.map(todo => <TodoItem
-                              key={todo}
-                              title={todo}
-                              time={Date.now()}
-                              update={ (old, newTodo) => this.setState({
-                                todos: todos.map(item => item === old ? newTodo : old)
-                              }) }></TodoItem>) }
-        <Text style={styles.instructions}>
-          {text}
-        </Text>
-        <InputText
-          submit={(text) => this.setState({todos: [...todos, text]})}
-          color='violet'
-        ></InputText>
+        <TodoContainer/>
       </View>
     );
   }
