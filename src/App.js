@@ -41,7 +41,13 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           Manage what you have to work on with a simple and easy to use interface
         </Text>
-        { todos.map(todo => <TodoItem title={todo}></TodoItem>) }
+        { todos.map(todo => <TodoItem
+                              key={todo}
+                              title={todo}
+                              time={Date.now()}
+                              update={ (old, newTodo) => this.setState({
+                                todos: todos.map(item => item === old ? newTodo : old)
+                              }) }></TodoItem>) }
         <Text style={styles.instructions}>
           {text}
         </Text>

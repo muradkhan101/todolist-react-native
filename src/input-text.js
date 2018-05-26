@@ -19,7 +19,7 @@ export default class InputText extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
+            text: props.default || '',
         }
     } 
     updateText(text) {
