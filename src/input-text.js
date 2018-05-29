@@ -12,7 +12,8 @@ const Container = glamourous.view({
 const Input = glamourous.textInput({
     backgroundColor: 'white',
     marginRight: 8,
-    flex: 1
+    flex: 1,
+    zIndex: 10
 })
 
 
@@ -29,14 +30,14 @@ export default class InputText extends React.Component<Props> {
     }
     render() {
         const { text } = this.state;
-        const { submit, color } = this.props;
+        const { submit, color, style } = this.props;
         const SubmitButton = glamourous.text({
             backgroundColor: color || '#5ace46',
             color: '#efefef',
             padding: 8
         })
         return (
-            <Container>
+            <Container style={style}>
                 <Input
                     onChangeText={this.updateText.bind(this)}
                     value={text}

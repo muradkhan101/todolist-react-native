@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import TodoContainer from './todo-container';
-
+import { TodoStore } from './todo-data-store';
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -40,7 +40,9 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>
           Manage what you have to work on with a simple and easy to use interface
         </Text>
-        <TodoContainer/>
+        <TodoStore>
+          <TodoContainer/>
+        </TodoStore>
       </View>
     );
   }
@@ -51,18 +53,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#3b83c6',
     padding: 16
   },
   welcome: {
     fontSize: 32,
     textAlign: 'center',
     margin: 12,
-    color: '#313131'
+    color: '#efefef'
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#f6f6f6',
     marginBottom: 5,
   },
+  z: { zIndex: 10 }
 });

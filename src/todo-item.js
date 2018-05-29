@@ -53,11 +53,11 @@ export default class TodoItem extends React.Component {
                         ? <TouchableNativeFeedback
                             onPress={() => this.setState({ editing: !editing })}>
                             <Title> {todo.text} </Title>
-                        </TouchableNativeFeedback>
+                          </TouchableNativeFeedback>
                         : <InputText
-                                submit={(newText) => ( update(newText, todo.id), this.setState({editing: !editing}))}
-                                default={todo.text}
-                            />
+                            submit={(newText) => ( update(newText, todo.id), this.setState({editing: !editing}))}
+                            default={todo.text}
+                          />
                     }
                     <Time> {todo.date} </Time>
                 </View>
